@@ -26,6 +26,7 @@ class CatBreed(models.Model):
     strangerFriendly = models.PositiveIntegerField(
         validators=[MaxValueValidator(5)], default=0)
     otherPhotos = models.TextField(blank=True)
+    popularity = models.IntegerField(default=0)
 
     def __str__(self):
         return self.breed

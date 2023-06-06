@@ -28,10 +28,29 @@ def get_all_breeds(request):
     return JsonResponse(allData, safe=False, status=200)
 
 
+#  popularCatBreed/
+def get_popular_breeds(request):
+
+    modelData = CatBreed.objects.filter(popularity__gt=0).order_by('-popularity')
+    allData = []
+
+    if modelData:
+        for data in modelData:
+            allData.append(model_to_dict(data))
+           #     data, fields=['id', 'image', 'breed', 'description']))
+    else:
+        return JsonResponse("There is no data", safe=False, status=404)
+
+    return JsonResponse(allData, safe=False, status=200)
+
+
+
 # '/catBreeds/id' endpoint
 def get_breed(request, id):
     try:
         modelData = CatBreed.objects.get(id=id)
+        modelData.popularity += 1
+        modelData.save() 
     except:
         raise Http404("Sorry There is no data with this id")
         # return JsonResponse("Sorry There is no data with this id", safe=False, status=404)

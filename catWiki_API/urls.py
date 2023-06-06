@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('catBreeds/', views.get_all_breeds),
     path('catBreeds/<int:id>/', views.get_breed),
-    path('catBreeds_search/<str:catBreeed>/', views.cat_breed_search)
+    path('catBreeds_search/<str:catBreeed>/', views.cat_breed_search),
+    path('popularCatBreed/', views.get_popular_breeds),
 
 ]
