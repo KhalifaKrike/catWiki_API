@@ -57,8 +57,27 @@ def get_breed(request, id):
 
     #data = {}
     if modelData:
-        data = model_to_dict(modelData)
-        data["otherPhotos"] = data["otherPhotos"].split(',')
+        data = {
+            "id": modelData.id,
+            "image": modelData.image,
+            "breed": modelData.breed,
+            "description": modelData.description,
+            "temperament": modelData.temperament,
+            "origin": modelData.origin,
+            "lifeSpan": modelData.lifeSpan,
+            "popularity": modelData.popularity,
+            "prope":[{"title": "adaptability", "rate": modelData.adaptability},
+            {"title": "affectionLevel", "rate": modelData.affectionLevel},
+            {"title": "childFriendly", "rate": modelData.childFriendly},
+            {"title": "grooming", "rate": modelData.grooming},
+            {"title": "intelligence", "rate": modelData.intelligence},
+            {"title": "healthIssues", "rate": modelData.healthIssues},
+            {"title": "socialNeeds", "rate": modelData.socialNeeds},
+            {"title": "strangerFriendly", "rate": modelData.strangerFriendly}],
+            "otherPhotos": modelData.otherPhotos.split(','),
+            
+        }
+    
 
         return JsonResponse(data, status=200)
 
